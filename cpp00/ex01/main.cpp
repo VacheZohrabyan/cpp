@@ -10,6 +10,7 @@ std::string get_user_input(std::string message)
     }
     return user_input;
 }
+
 void add_user_in_contact(PhoneBook* phoneBook)
 {
     std::string first_name;
@@ -38,11 +39,11 @@ int main()
         if (value == "ADD")
             add_user_in_contact(&phoneBook);
         else if (value == "SEARCH")
-            phoneBook.Search(phoneBook);
+            phoneBook.Search();
         else if (value == "EXIT")
             return 0;
         else
-            continue;    
+            continue;
     }
 
 }

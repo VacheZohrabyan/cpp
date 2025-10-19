@@ -4,22 +4,22 @@
 #include <iostream>
 #include "Contact.hpp"
 #include <iomanip>
-#include <sstream>
 #include <limits>
+
 class PhoneBook
 {
 private:
 	Contact contact_array[8];
-	size_t contact_size;
+	int contact_size;
 
 public:
 	PhoneBook();
-	PhoneBook(size_t contact_size);
 	~PhoneBook();
 
 public:
+	int get_contact_size();
 	void Add(Contact contact);
-	void Search(PhoneBook phoneBook);
+	void Search();
 };
 
 #endif

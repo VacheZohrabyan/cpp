@@ -2,12 +2,7 @@
 
 PhoneBook::PhoneBook()
 {
-
-}
-
-PhoneBook::PhoneBook(size_t contact_size)
-{
-	contact_size = contact_size;
+	contact_size = 0;
 }
 
 PhoneBook::~PhoneBook()
@@ -19,10 +14,10 @@ void PhoneBook::Add(Contact contact)
 {
 	if (contact_size == 8)
 	{
-		int i = 1;
-		for (; i < 8; ++i)
+		int i = 0;
+		for (; i < contact_size - 1; ++i)
 		{
-			contact_array[i - 1] = contact_array[i];
+			contact_array[i] = contact_array[i + 1];
 		}
 		contact_array[i] = contact;
 	}
@@ -31,6 +26,11 @@ void PhoneBook::Add(Contact contact)
 		contact_array[contact_size] = contact;
 		++contact_size;
 	}
+}
+
+int PhoneBook::get_contact_size()
+{
+	return contact_size;
 }
 
 void print_text(std::string value)
@@ -53,7 +53,7 @@ void print_colum(Contact* contact, int size)
 	int i = 0;
 	while (i < size)
 	{
-		std::cout << std::setfill(' ') << std::setw(10) << i << "|";
+		std::cout << std::setfill(' ') << std::setw(10) << (i + 1) << "|";
 		print_text(contact[i].get_first_name());
 		print_text(contact[i].get_last_name());
 		print_text(contact[i].get_nick_name());
@@ -79,22 +79,25 @@ void print_contact(Contact contact)
 	print_text(contact.get_nick_name());
 	print_text(contact.get_phone_number());
 	print_text(contact.get_darkest_secret());
+	std::cout << std::endl;
 }
 
-void PhoneBook::Search(PhoneBook phoneBook)
+void PhoneBook::Search()
 {
 	int index;
 	print_colum_name();
-	print_colum(phoneBook.contact_array, phoneBook.contact_size);
+	print_colum(contact_array, get_contact_size());
 	std::cout << "Enter index: ";
 	if (!(std::cin >> index))
 	{
 		std::cout << "Invalid index: \n";
 		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return ;
 	}
-	else if (index > 0 && index <= phoneBook.contact_size)
-	{
-		print_contact(phoneBook.contact_array[index - 1]);
-	}
+	else if (index > 0 && index <= get_contact_size())
+		print_contact(contact_array[index - 1]);
+	else
+		std::cout << "Invalid argument\n";
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

@@ -2,7 +2,7 @@ NAME = phonecontact
 
 GCC = g++
 
-GCCFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+GCCFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 
 SOURCE = main.cpp \
 		 Contact.cpp \
