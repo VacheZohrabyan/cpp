@@ -5,6 +5,11 @@ PhoneBook::PhoneBook()
 
 }
 
+PhoneBook::PhoneBook(size_t contact_size)
+{
+	contact_size = contact_size;
+}
+
 PhoneBook::~PhoneBook()
 {
 

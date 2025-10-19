@@ -14,6 +14,7 @@ private:
 
 public:
 	PhoneBook();
+	PhoneBook(size_t contact_size);
 	~PhoneBook();
 
 public:
