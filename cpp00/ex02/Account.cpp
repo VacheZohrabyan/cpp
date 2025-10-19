@@ -117,15 +117,8 @@ void Account::displayAccountsInfos()
 void Account::_displayTimestamp()
 {
     std::time_t current_time = std::time(NULL);
-    std::tm * tm = std::localtime(&current_time);
+    char temp[20];
+    std::strftime(temp, sizeof(temp), "%Y%m%d_%H%M%S", std::localtime(&current_time));
 
-    std::cout << "[" ;
-    std::cout << tm->tm_year;
-    std::cout << tm->tm_mon;
-    std::cout << tm->tm_mday;
-    std::cout << "_";
-    std::cout << tm->tm_hour;
-    std::cout << tm->tm_min;
-    std::cout << tm->tm_sec;
-    std::cout << "]";
+    std::cout << "[" << temp << "]";
 }
