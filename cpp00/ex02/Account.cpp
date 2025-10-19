@@ -12,16 +12,17 @@ Account::Account(int initial_deposit)
     _accountIndex = _nbAccounts;
     _amount = initial_deposit;
     _nbDeposits = 0;
-    _nbWithdrawals = 0;    
-    _nbDeposits++;
+    _nbWithdrawals = 0;
     _nbAccounts++;
     _totalAmount += initial_deposit;
-
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex << ";amount:" << _amount << ";created" << std::endl;
 }
 
 Account::~Account()
 {
-
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex << ";amount:" << _amount << ";closed" << std::endl;
 }
 
 int Account::getNbAccounts()
@@ -46,25 +47,43 @@ int Account::getNbWithdrawals()
 
 void Account::makeDeposit(int deposit)
 {
-    if (deposit <= 0)
-        return ;
-    _nbDeposits += deposit;
+    _displayTimestamp();
+    _nbDeposits++;
     _totalNbDeposits++;
+    std::cout << " index:" << _accountIndex
+              << ";p_amount:" << _amount
+              << ";deposits:" << deposit
+              << ";amount:" << _amount
+              << ";nb_deposits:" << _nbDeposits
+              << std::endl;
     _totalAmount += deposit;
+    _amount += deposit;
 }
 
 bool Account::makeWithdrawal(int withdrawal)
 {
     if (withdrawal <= 0)
         return false;
-    if (_nbDeposits < withdrawal)
-        return false;
-    if (_nbDeposits >= withdrawal)
+    if (_amount < withdrawal)
     {
-        _nbDeposits -= withdrawal;
+        _displayTimestamp();
+        std::cout << " index:" << _accountIndex
+              << ";p_amount:" << _amount
+              << ";withdrawal:refused" << std::endl;
+    }
+    if (_amount > withdrawal)
+    {
+        _displayTimestamp();
         _nbWithdrawals++;
+        _amount -= withdrawal;
+        _totalAmount -= withdrawal;
+        std::cout << " index:" << _accountIndex
+              << ";p_amount:" << _amount
+              << ";withdrawal:" << withdrawal
+              << ";amount:" << (_amount)
+              << ";nb_withdrawals:" << _nbWithdrawals
+              << std::endl;
         _totalNbWithdrawals++;
-        _totalAmount -= _amount;
         return true;
     }
     return false;
