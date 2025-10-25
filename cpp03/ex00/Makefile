@@ -1,10 +1,10 @@
-NAME = Fixed
+NAME = ClapTrap
 
 GCC = g++
 
 GCCFLAGS = -Wall -Wextra -Werror -std=c++98#-fsanitize=address
 
-SOURCE = main.cpp Point.cpp bsp.cpp ../ex02/Fixed.cpp
+SOURCE = main.cpp ClapTrap.cpp
 
 OBJS = $(SOURCE:.cpp=.o)
 
